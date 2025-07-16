@@ -1,5 +1,8 @@
 # 🖥️ Proc Grapher - Enhanced System Monitor
 
+[![Deploy to GitHub Pages](https://github.com/yourusername/proc-grapher/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/yourusername/proc-grapher/actions/workflows/deploy-pages.yml)
+[![Live Demo](https://img.shields.io/badge/Demo-GitHub%20Pages-blue?logo=github)](https://yourusername.github.io/proc-grapher/)
+
 A comprehensive real-time system monitoring application with auto-detection for Linux `/proc` filesystem support. Features a configurable Python FastAPI backend and a client frontend that can connect to any backend instance via IP address.
 
 ## ✨ Enhanced Features
@@ -236,7 +239,55 @@ npm run dev
 - **macOS**: Cross-platform compatibility testing
 - **Docker**: Deploy backend in containers for remote monitoring
 
+### 🔄 GitHub Actions & CI/CD
+
+The repository includes automated workflows:
+
+1. **GitHub Pages Deployment** (`.github/workflows/deploy-pages.yml`):
+   - Triggers on pushes to `main` branch
+   - Builds and deploys frontend to GitHub Pages
+   - Available at: `https://yourusername.github.io/proc-grapher/`
+
+2. **Pull Request Testing** (`.github/workflows/test-build.yml`):
+   - Tests frontend builds on all pull requests
+   - Ensures code quality before merging
+
+### 📋 Setting Up GitHub Pages
+
+1. **Enable GitHub Pages**:
+   - Go to repository **Settings** → **Pages**
+   - Source: **Deploy from a branch**
+   - Branch: **gh-pages** (will be created automatically)
+
+2. **Configure Repository Name**:
+   - Update `base` in `frontend/vite.config.js` if repository name differs from `proc-grapher`
+   - Format: `/your-repository-name/`
+
+3. **First Deployment**:
+   - Push to `main` branch or trigger workflow manually
+   - GitHub Actions will build and deploy automatically
+   - Access at: `https://yourusername.github.io/proc-grapher/`
+
 ## 🏭 Production Deployment
+
+### 🌐 GitHub Pages (Recommended for Frontend)
+
+The frontend is automatically deployed to GitHub Pages via GitHub Actions:
+
+1. **Automatic Deployment**: 
+   - Push to `main` branch triggers automatic deployment
+   - Available at: `https://yourusername.github.io/proc-grapher/`
+
+2. **Manual Deployment**:
+   ```bash
+   # Trigger manual deployment via GitHub Actions UI
+   # Or push frontend changes to main branch
+   ```
+
+3. **Usage**:
+   - Access the hosted client at your GitHub Pages URL
+   - Enter any backend IP:port (e.g., `your-server.com:8000`)
+   - Monitor any system remotely via the web interface
 
 ### Backend Production
 ```bash
@@ -245,7 +296,7 @@ poetry install --no-dev
 poetry run uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4
 ```
 
-### Frontend Production
+### Local Frontend Production
 ```bash
 cd frontend
 npm run build
@@ -259,7 +310,7 @@ cd backend
 docker build -t proc-grapher-backend .
 docker run -p 8000:8000 proc-grapher-backend
 
-# Frontend
+# Frontend (alternative to GitHub Pages)
 cd frontend  
 npm run build
 # Serve dist/ with nginx or any static server
